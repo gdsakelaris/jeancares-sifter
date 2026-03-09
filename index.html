@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jean Cares Fund — Healthy Food for Your Community</title>
+  <meta name="description" content="The Jean Cares Fund provides healthy grocery benefits to community members in need. Shop fresh, nutritious food through our partner marketplace." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark:   #1e5631;
+      --green-mid:    #2d8653;
+      --green-light:  #52b788;
+      --green-pale:   #d8f3dc;
+      --red:          #e63946;
+      --navy:         #1d3557;
+      --cream:        #fafaf9;
+      --white:        #ffffff;
+      --gray-100:     #f4f4f5;
+      --gray-200:     #e4e4e7;
+      --gray-400:     #a1a1aa;
+      --gray-500:     #71717a;
+      --gray-700:     #3f3f46;
+      --gray-900:     #18181b;
+      --radius-sm:    6px;
+      --radius-md:    12px;
+      --radius-lg:    20px;
+      --shadow-sm:    0 1px 3px rgba(0,0,0,.08);
+      --shadow-md:    0 4px 20px rgba(0,0,0,.10);
+      --shadow-lg:    0 12px 48px rgba(0,0,0,.14);
+      --transition:   0.2s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--gray-900);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: 100%;
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* =====================
+       NAVBAR
+    ===================== */
+    .navbar {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+    .navbar__logos {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .navbar__logos img { height: 36px; width: auto; }
+    .navbar__divider {
+      width: 1px;
+      height: 28px;
+      background: var(--gray-200);
+    }
+    .navbar__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green-dark);
+      color: var(--white);
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      transition: background var(--transition), transform var(--transition);
+      white-space: nowrap;
+    }
+    .navbar__cta:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+    /* Remove tap highlight & delay on interactive elements */
+    .btn-primary, .btn-ghost, .navbar__cta, .shop-btn {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    /* =====================
+       MOBILE — up to 639px
+    ===================== */
+    @media (max-width: 639px) {
+      /* Reduce section vertical padding */
+      .section { padding: 56px 0; }
+
+      /* Hero */
+      .hero { padding: 60px 0 68px; }
+      .section__header { margin-bottom: 36px; }
+
+      /* Full-width stacked buttons for easy tapping */
+      .hero__actions { width: 100%; }
+      .btn-primary,
+      .btn-ghost { width: 100%; justify-content: center; }
+
+      /* Tighten hero meta row */
+      .hero__meta { margin-top: 36px; gap: 10px; }
+
+      /* CTA card: reduce padding, soften radius, full-width button */
+      .cta-card { padding: 40px 20px; border-radius: var(--radius-md); }
+      .shop-btn { width: 100%; justify-content: center; }
+
+      /* Mission section */
+      .mission-grid { gap: 36px; }
+
+      /* Pillar cards: tighter padding on small screens */
+      .pillar { padding: 16px 12px; }
+
+      /* Partnership strip */
+      .partner-strip { padding: 36px 20px; }
+      .partner-strip__logos { gap: 20px; }
+      .partner-strip__logos img { height: 36px; }
+
+      /* Footer */
+      footer { padding: 48px 20px 28px; }
+      .footer__bottom { margin-top: 32px; }
+    }
+
+    /* =====================
+       TINY SCREENS — up to 400px
+    ===================== */
+    @media (max-width: 400px) {
+      /* Stack pillars to single column so text isn't cramped */
+      .pillars { grid-template-columns: 1fr; }
+
+      /* Shrink navbar: hide cart icon text, reduce logo size */
+      .navbar__logos img { height: 24px; }
+      .navbar__logos { gap: 10px; }
+      .navbar__cta { font-size: 0.78rem; padding: 9px 13px; }
+      .navbar__cta svg { display: none; }
+
+      /* Eyebrow badge: allow wrapping on tiny screens */
+      .hero__eyebrow {
+        font-size: 0.7rem;
+        letter-spacing: 0.04em;
+        text-align: center;
+        white-space: normal;
+        max-width: 90%;
+      }
+    }
+
+    /* =====================
+       HERO
+    ===================== */
+    .hero {
+      background:
+        linear-gradient(150deg, rgba(30,86,49,0.86) 0%, rgba(45,106,79,0.82) 55%, rgba(29,53,87,0.91) 100%),
+        url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      color: var(--white);
+      padding: 96px 0 104px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 15% 110%, rgba(82,183,136,.22) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 45% at 85% -10%, rgba(29,53,87,.35) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--green-pale);
+      margin-bottom: 28px;
+    }
+    .hero__dot {
+      width: 6px; height: 6px;
+      background: var(--green-light);
+      border-radius: 50%;
+      animation: blink 2.2s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .3; }
+    }
+    .hero h1 {
+      font-size: clamp(2.1rem, 5.5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.12;
+      margin-bottom: 22px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--green-light);
+    }
+    .hero__sub {
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      opacity: 0.85;
+      max-width: 520px;
+      margin: 0 auto 40px;
+      line-height: 1.75;
+      font-weight: 400;
+    }
+    .hero__actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    @media (min-width: 480px) {
+      .hero__actions { flex-direction: row; justify-content: center; }
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      color: var(--green-dark);
+      font-size: 0.975rem;
+      font-weight: 700;
+      padding: 15px 30px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-md);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--white);
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 15px 26px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid rgba(255,255,255,.35);
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,.75); background: rgba(255,255,255,.07); }
+    .hero__meta {
+      margin-top: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 0.8rem;
+      opacity: .6;
+    }
+    .hero__meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Eyebrow text hierarchy */
+    .hero__eyebrow-brand {
+      color: var(--white);
+      font-weight: 700;
+    }
+    .hero__eyebrow-sep {
+      opacity: 0.35;
+      margin: 0 1px;
+    }
+
+    /* =====================
+       SECTIONS
+    ===================== */
+    /* Sections use .container inside for horizontal padding — no horizontal padding here */
+    .section { padding: 80px 0; }
+    .section--tinted { background: var(--gray-100); }
+
+    .section__header { text-align: center; margin-bottom: 56px; }
+    .eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 12px;
+    }
+    .section__title {
+      font-size: clamp(1.6rem, 3.2vw, 2.3rem);
+      font-weight: 800;
+      color: var(--gray-900);
+      line-height: 1.2;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .section__sub {
+      font-size: 1rem;
+      color: var(--gray-500);
+      margin-top: 14px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    /* =====================
+       HOW IT WORKS
+    ===================== */
+    .steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    @media (min-width: 640px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+
+    .step {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      padding: 32px 24px 28px;
+      text-align: center;
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+    .step:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+    .step__icon {
+      width: 52px;
+      height: 52px;
+      background: var(--green-pale);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      color: var(--green-dark);
+    }
+    .step__icon svg { width: 26px; height: 26px; }
+    .step h3 {
+      font-size: 0.975rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 10px;
+    }
+    .step p {
+      font-size: 0.875rem;
+      color: var(--gray-500);
+      line-height: 1.65;
+    }
+
+    /* =====================
+       SHOP CTA
+    ===================== */
+    .cta-card {
+      background: linear-gradient(140deg, var(--green-dark) 0%, #2d6a4f 100%);
+      border-radius: var(--radius-lg);
+      padding: 64px 32px;
+      text-align: center;
+      color: var(--white);
+      max-width: 760px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-lg);
+    }
+    .cta-card__icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(255,255,255,.14);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      color: var(--white);
+    }
+    .cta-card__icon svg { width: 30px; height: 30px; }
+    .cta-card h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+    .cta-card p {
+      font-size: 1rem;
+      opacity: .82;
+      max-width: 460px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+    .shop-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      color: var(--green-dark);
+      font-size: 1.025rem;
+      font-weight: 700;
+      padding: 17px 36px;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 4px 20px rgba(0,0,0,.18);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .shop-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,.24); }
+    .cta-card__note {
+      margin-top: 20px;
+      font-size: 0.78rem;
+      opacity: .52;
+    }
+
+    /* =====================
+       MISSION
+    ===================== */
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 56px;
+      align-items: start;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    @media (min-width: 768px) {
+      .mission-grid { grid-template-columns: 1fr 1fr; align-items: center; }
+    }
+
+    .mission__quote {
+      font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+      font-weight: 700;
+      color: var(--green-dark);
+      line-height: 1.45;
+      border-left: 3px solid var(--green-mid);
+      padding-left: 18px;
+      margin-bottom: 22px;
+    }
+    .mission__body {
+      color: var(--gray-700);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    /* Founder card */
+    .founder-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid var(--gray-200);
+    }
+    .founder-card__photo {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--green-pale);
+      border: 2px solid var(--gray-200);
+    }
+    .founder-card__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    /* Placeholder shown when no photo yet */
+    .founder-card__photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green-mid);
+    }
+    .founder-card__photo-placeholder svg { width: 28px; height: 28px; }
+    .founder-card__name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--gray-900);
+    }
+    .founder-card__title {
+      font-size: 0.8rem;
+      color: var(--gray-500);
+      margin-top: 2px;
+      line-height: 1.4;
+    }
+
+    /* Pillars */
+    .pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .pillar {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      padding: 20px 16px;
+      transition: border-color var(--transition);
+    }
+    .pillar:hover { border-color: var(--green-light); }
+    .pillar__icon {
+      width: 44px;
+      height: 44px;
+      background: var(--green-pale);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      color: var(--green-dark);
+      flex-shrink: 0;
+    }
+    .pillar__icon svg { width: 22px; height: 22px; }
+    .pillar h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 6px;
+    }
+    .pillar p {
+      font-size: 0.78rem;
+      color: var(--gray-500);
+      line-height: 1.55;
+    }
+
+    /* =====================
+       PARTNERSHIP STRIP
+    ===================== */
+    .partner-strip {
+      padding: 44px 24px;
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+      text-align: center;
+    }
+    .partner-strip__label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 28px;
+    }
+    .partner-strip__logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .partner-strip__logos img {
+      height: 48px;
+      width: auto;
+    }
+    .partner-strip__sep {
+      font-size: 1.2rem;
+      color: var(--gray-200);
+      user-select: none;
+    }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    footer {
+      background: var(--gray-900);
+      color: var(--white);
+      padding: 60px 24px 32px;
+    }
+    .footer__grid {
+      max-width: 1060px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    @media (min-width: 640px) {
+      .footer__grid { grid-template-columns: 1.6fr 1fr 1fr; }
+    }
+    .footer__brand img {
+      height: 34px;
+      width: auto;
+      margin-bottom: 16px;
+      filter: brightness(0) invert(1);
+      opacity: .85;
+    }
+    .footer__brand p {
+      font-size: 0.84rem;
+      color: var(--gray-400);
+      line-height: 1.7;
+      max-width: 270px;
+    }
+    .footer__col h4 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      margin-bottom: 16px;
+    }
+    .footer__col ul { list-style: none; }
+    .footer__col ul li { margin-bottom: 10px; }
+    .footer__col ul li a {
+      font-size: 0.875rem;
+      color: #d4d4d8;
+      transition: color var(--transition);
+    }
+    .footer__col ul li a:hover { color: var(--green-light); }
+    .footer__bottom {
+      max-width: 1060px;
+      margin: 40px auto 0;
+      padding-top: 24px;
+      border-top: 1px solid #3f3f46;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+      text-align: center;
+    }
+    @media (min-width: 640px) {
+      .footer__bottom { flex-direction: row; justify-content: space-between; text-align: left; }
+    }
+    .footer__bottom p { font-size: 0.78rem; color: var(--gray-500); }
+    .footer__heart { color: var(--red); }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar__inner">
+      <div class="navbar__logos">
+        <a href="https://www.lksmallus.com" target="_blank" rel="noopener noreferrer"><img src="lksmall_logo.png" alt="LK Small" /></a>
+        <div class="navbar__divider"></div>
+        <a href="https://www.jeancf.org" target="_blank" rel="noopener noreferrer"><img src="jeancares_logo.png" alt="Jean Cares Fund" /></a>
+      </div>
+      <!-- Replace YOUR_SIFTER_MARKETPLACE_URL with the actual Sifter Solutions URL -->
+      <a href="YOUR_SIFTER_MARKETPLACE_URL" class="navbar__cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Shop Now
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero__eyebrow">
+        <span class="hero__dot"></span>
+        <span class="hero__eyebrow-brand">Jean Cares Fund</span>
+        <span class="hero__eyebrow-sep">—</span>
+        Community Program
+      </div>
+      <h1>Healthy Food Delivered to <em>Your Community</em></h1>
+      <p class="hero__sub">
+        The Jean Cares Fund brings fresh, nutritious groceries directly to Chicagoland community members — making healthy food a reality in the neighborhoods that need it most.
+      </p>
+      <div class="hero__actions">
+        <!-- Replace YOUR_SIFTER_MARKETPLACE_URL with the actual Sifter Solutions URL -->
+        <a href="YOUR_SIFTER_MARKETPLACE_URL" class="btn-primary">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Access the Marketplace
+        </a>
+        <a href="#about" class="btn-ghost">
+          Our Story
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+      </div>
+      <div class="hero__meta">
+        <span class="hero__meta-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          No cost to recipients
+        </span>
+        <span class="hero__meta-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Fresh, healthy options
+        </span>
+        <span class="hero__meta-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Serving the Chicagoland area
+        </span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">Simple Process</p>
+        <h2 class="section__title">Three steps to your groceries</h2>
+        <p class="section__sub">We've made the process as simple as possible so you can focus on nourishing yourself and your family.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <h3>Confirm Your Benefit</h3>
+          <p>Reach out to the Jean Cares Fund or LK Small to verify your grocery benefit. Your coordinator will walk you through the next steps.</p>
+        </div>
+        <div class="step">
+          <div class="step__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.98 1.61h9.72a2 2 0 001.98-1.61L23 6H6"/></svg>
+          </div>
+          <h3>Shop the Marketplace</h3>
+          <p>Browse fresh produce, proteins, grains, and household staples through our curated healthy grocery marketplace.</p>
+        </div>
+        <div class="step">
+          <div class="step__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <h3>Receive Your Delivery</h3>
+          <p>Your groceries arrive directly at your door — powered by LK Small's mission to bring healthy goods to every community.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOP CTA -->
+  <section class="section section--tinted" id="shop">
+    <div class="container">
+      <div class="cta-card">
+        <div class="cta-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        </div>
+        <h2>Ready to shop healthy groceries?</h2>
+        <p>
+          Access your grocery benefit through our partner marketplace — stocked with fresh, nutritious foods to support a healthier life.
+        </p>
+        <!-- Replace YOUR_SIFTER_MARKETPLACE_URL with the actual Sifter Solutions URL -->
+        <a href="YOUR_SIFTER_MARKETPLACE_URL" class="shop-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Open the Marketplace
+        </a>
+        <p class="cta-card__note">For questions about your benefit, contact the Jean Cares Fund directly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION / ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="mission-grid">
+        <div>
+          <p class="eyebrow">Our Story</p>
+          <div class="mission__quote">
+            "Transporting and Delivering Equality — bringing healthy food to the Chicagoland communities that need it most."
+          </div>
+          <p class="mission__body">
+            The Jean Cares Fund was founded in honor of Jean Lampley — a mother whose battle with dementia and hypertension showed, firsthand, how critical timely access to nutrition and medication truly is.
+          </p>
+          <p class="mission__body">
+            Her son, Lee M. Lampley II, grew up watching his father drive miles to the suburbs for basic healthcare and healthy food. That childhood reality became the foundation for LK Small and the Jean Cares Fund: a commitment to ending food and healthcare deserts across the Chicagoland area and beyond.
+          </p>
+          <div class="founder-card">
+            <div class="founder-card__photo">
+              <!--
+                Replace this placeholder with:
+                <img src="lee_lampley.jpg" alt="Lee M. Lampley II" />
+                once the photo is available.
+              -->
+              <div class="founder-card__photo-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+                </svg>
+              </div>
+            </div>
+            <div>
+              <div class="founder-card__name">Lee M. Lampley II</div>
+              <div class="founder-card__title">Founder & CEO, LK Small<br />In honor of Jean Lampley</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="eyebrow" style="margin-bottom: 20px;">Our 4 Core Pillars</p>
+          <div class="pillars">
+            <div class="pillar">
+              <div class="pillar__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <h4>Simplicity</h4>
+              <p>Simple solutions to complex logistical challenges — making healthy food accessible without barriers.</p>
+            </div>
+            <div class="pillar">
+              <div class="pillar__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+              </div>
+              <h4>Service Excellence</h4>
+              <p>Every recipient is our most important stakeholder. Excellence in every delivery, every time.</p>
+            </div>
+            <div class="pillar">
+              <div class="pillar__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              </div>
+              <h4>Scalability</h4>
+              <p>Starting in the Chicagoland area with a repeatable model built for expansion across the country.</p>
+            </div>
+            <div class="pillar">
+              <div class="pillar__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+              </div>
+              <h4>Sustainability</h4>
+              <p>Energy-efficient operations and a minority-owned model that creates lasting societal impact.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERSHIP STRIP -->
+  <div class="partner-strip">
+    <p class="partner-strip__label">A partnership between</p>
+    <div class="partner-strip__logos">
+      <a href="https://www.lksmallus.com" target="_blank" rel="noopener noreferrer"><img src="lksmall_logo.png" alt="LK Small" /></a>
+      <span class="partner-strip__sep">×</span>
+      <a href="https://www.jeancf.org" target="_blank" rel="noopener noreferrer"><img src="jeancares_logo.png" alt="Jean Cares Fund" /></a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="https://www.jeancf.org" target="_blank" rel="noopener noreferrer"><img src="jeancares_logo.png" alt="Jean Cares Fund" /></a>
+        <p>The Jean Cares Fund is dedicated to providing equitable access to healthy food and healthcare in underserved communities across America.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Program</h4>
+        <ul>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#shop">Access Your Benefit</a></li>
+          <li><a href="#about">Our Story</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Organization</h4>
+        <ul>
+          <li><a href="https://www.lksmallus.com" target="_blank" rel="noopener noreferrer">LK Small</a></li>
+          <li><a href="mailto:info@jeancares.org">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2025 Jean Cares Fund & LK Small US. All rights reserved. Made with <span class="footer__heart">❤</span> in the Chicagoland area.</p>
+      <p>Affiliated charity of LK Small — "Transporting and Delivering Equality."</p>
+    </div>
+  </footer>
+
+</body>
+</html>
